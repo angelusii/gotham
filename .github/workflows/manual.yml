@@ -8,15 +8,6 @@ on:
   workflow_dispatch:
     # Inputs the workflow accepts.
     inputs:
-      name:
-        # Friendly description to be shown in the UI instead of 'name'
-        description: 'Script'
-        # Default value if no value is explicitly provided
-        default: 'deleteAll'
-        # Input has to be provided for the workflow to run
-        required: true
-        # The data type of the input
-        type: string
       choice:
         type: choice
         description: Environment
@@ -25,6 +16,21 @@ on:
         - PROD
         - INT
         - DEV
+      deleteAlldata:
+        description: 'deleteAllData.cls'
+        default: 'false'
+        required: true
+        type: boolean
+      updateScratchEmail:
+        description: 'updateScratchEmail.cls'
+        default: 'false'
+        required: true
+        type: boolean
+      updateUserPermission:
+        description: 'updateScratchEmail.cls'
+        default: 'false'
+        required: true
+        type: boolean
 
 # A workflow run is made up of one or more jobs that can run sequentially or in parallel
 jobs:
