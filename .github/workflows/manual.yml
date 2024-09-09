@@ -16,7 +16,6 @@ on:
         - PROD
         - INT
         - DEV
-        - ${{ vars.TEST_VARIABLE }}
       Script:
        type: string
        description: Script name
@@ -34,4 +33,4 @@ jobs:
     steps:
     # Runs a single command using the runners shell
     - name: Send greeting
-      run: echo "Hello ${{ inputs.Environment }} and ${{ vars.TEST_VARIABLE }}"
+      run: echo "Hello ${{ inputs.Environment }} and ${{ vars.TEST_VARIABLE }} nebo ${{ vars.varan }}"
