@@ -33,4 +33,4 @@ jobs:
     steps:
     # Runs a single command using the runners shell
     - name: Send greeting
-      run: echo "Hello ${{ inputs.Environment }} and ${{ vars.TEST_VARIABLE }} nebo ${{ vars.varan }}"
+      run: echo "Hello ${{ inputs.Environment }} and ${{ PROD.TEST_VARIABLE }} nebo ${{ vars.varan }}"
