@@ -16,6 +16,7 @@ on:
         - PROD
         - INT
         - DEV
+        - ${{ vars.TEST_VARIABLE }}
       Script:
        type: string
        description: Script name
