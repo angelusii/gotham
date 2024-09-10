@@ -41,7 +41,7 @@ jobs:
            SF_AUTH_URL: ${{ secrets.SF_AUTH_URL }}
            SFC_ORG: ${{ vars.SFC_ORG }}
         
-      run: sf org login sfdx-url --alias ${SFC_ORG} sfdx-url-stdin -${SF_AUTH_URL}
+      run: sf org login sfdx-url --alias ${SFC_ORG} sfdx-url-stdin -force://PlatformCLI::5Aep861t2K6ODXFXkHNAEd8L1pXtG6_bxtwyIQDXQjMWdNVX99uYn2DzLJqjCa14asS1xFxiE_QLO1RTJeguaH9@empathetic-goat-fcaskn-dev-ed.trailblaze.my.salesforce.com
 
     - name: List orgs        
       run: sfdx force:org:list --all
