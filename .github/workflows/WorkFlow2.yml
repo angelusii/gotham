@@ -39,7 +39,7 @@ jobs:
            SF_AUTH_URL: ${{ secrets.SF_AUTH_URL }}
            SFC_ORG: ${{ vars.SFC_ORG }} 
       run: echo "SFC_ORG = ${SFC_ORG}" /n
-           echo "${{inputs.scriptName}}
+           echo "ScriptName = ${{inputs.scriptName}}"
   
         
         
