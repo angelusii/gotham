@@ -26,7 +26,7 @@ on:
 # A workflow run is made up of one or more jobs that can run sequentially or in parallel
 jobs:
   # This workflow contains a single job called "greet"
-  RunSalesforceScripts:
+  EchoVariables:
     # The type of runner that the job will run on
     runs-on: ubuntu-latest #změnit na csas-linux
     environment: ${{inputs.environment}}
@@ -34,11 +34,11 @@ jobs:
     # Steps represent a sequence of tasks that will be executed as part of the job
     steps:          
     # Runs a single command using the runners shell
-    - name: Authorize org
+    - name: Echo Variable
       env:
            SF_AUTH_URL: ${{ secrets.SF_AUTH_URL }}
            SFC_ORG: ${{ vars.SFC_ORG }} 
-      run: echo "SFC_ORG = ${SFC_ORG} and ScriptName = ${{inputs.scriptName}} and environment=${inputs.Environment}"
+      run: echo "SFC_ORG = ${SFC_ORG} and ScriptName = ${{inputs.scriptName}} and environment=${{inputs.Environment}}"
   
         
         
