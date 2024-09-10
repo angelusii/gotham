@@ -50,7 +50,7 @@ jobs:
         SF_SCRIPT: ${{ inputs.runScript }}
         SFC_ORG: ${{ vars.SFC_ORG }} 
       run: 
-        sf apex run -o ${SFC_ORG} -file force-app/main/default/classes/accountCreator.cls
+        sf apex run -o ${SFC_ORG} -file ${GITHUB_WORKSPACE}/scripts/deleteAcc.apex
         
         
       
