@@ -43,14 +43,14 @@ jobs:
       env:
            SF_AUTH_URL: ${{ secrets.SF_AUTH_URL }}
            SFC_ORG: ${{ vars.SFC_ORG }} 
-      run:  sf org login sfdx-url --alias Trailblazer --sfdx-url-file -f ${GITHUB_WORKSPACE}/URL/authFile.json
+      run:  sf org login sfdx-url  --sfdx-url-file -f ${GITHUB_WORKSPACE}/URL/authFile.json --alias Trailblazer
 
     - name: runScript
       env: 
         SF_SCRIPT: ${{ inputs.runScript }}
         SFC_ORG: ${{ vars.SFC_ORG }} 
       run: 
-        sf apex run --target-org Trailblazer --file ${GITHUB_WORKSPACE}/scripts/deleteAcc.apex
+        sf apex run --target-org Trailblazer -file ${GITHUB_WORKSPACE}/scripts/deleteAcc.apex
         
         
       
