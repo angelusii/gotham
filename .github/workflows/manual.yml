@@ -42,6 +42,7 @@ jobs:
            SFC_ORG: ${{ vars.SFC_ORG }}
         
       run: sf org login --alias ${SFC_ORG} sfdx-url-stdin -${SF_AUTH_URL}
+           sfdx force:org:list --all
 
     - name: runScript
       env: 
