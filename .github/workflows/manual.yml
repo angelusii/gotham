@@ -16,7 +16,7 @@ on:
         - PROD
         - INT
         - DEV
-      Script:
+      runScript:
        type: string
        description: Script name
        required: true
@@ -38,11 +38,11 @@ jobs:
            SF_AUTH_URL: ${{ secrets.SF_AUTH_URL }}
            SFC_ORG: ${{ vars.SFC_ORG }}
         
-      run: echo "Hello ${{ inputs.Environment }} and ${{ vars.KATANA_DEV }} nebo URL ${{ secrets.SF_AUTH_URL }}"
+      run: echo "Input Environment ${{ inputs.Environment }} /n test variable ${{ vars.KATANA_DEV }} /n secret URL ${{ secrets.SF_AUTH_URL }}"
           sf org login --alias ${SFC_ORG} sfdx-url-stdin -${SF_AUTH_URL}
     - name: runScript
       env: 
-        SF_SCRIPT: ${inputs.Script}
+        SF_SCRIPT: ${{ inputs.runScript }}
       run: 
         echo "script {$SF_SCRIPT}"
         sf apex run --file ~/{$SF_SCRIPT}
