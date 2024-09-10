@@ -1,1 +1,1 @@
-delete [SELECT Id FROM Account limit 1];
+delete [SELECT Id FROM Account where name like 'Alex%' limit 1];
