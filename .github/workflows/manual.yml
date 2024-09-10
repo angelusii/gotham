@@ -32,6 +32,9 @@ jobs:
 
     # Steps represent a sequence of tasks that will be executed as part of the job
     steps:
+    - name: Salesforce SFDX CLI Action
+      uses: sfdx-actions/setup-sfdx@v1
+            
     # Runs a single command using the runners shell
     - name: Authorize org
       env:
