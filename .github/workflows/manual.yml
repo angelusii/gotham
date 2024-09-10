@@ -43,7 +43,7 @@ jobs:
       env:
            SF_AUTH_URL: ${{ secrets.SF_AUTH_URL }}
            SFC_ORG: ${{ vars.SFC_ORG }} 
-      run:  sf org login sfdx-url --sfdx-url-file -f ${GITHUB_WORKSPACE}/URL/authFile.json --alias Trailblazer
+      run:  sf org login sfdx-url --sfdx-url-file ${GITHUB_WORKSPACE}/URL/authFile.json --alias Trailblazer
     - name: List org
       run:    sf org list
     - name: runScript
