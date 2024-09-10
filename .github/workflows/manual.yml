@@ -44,7 +44,8 @@ jobs:
            SF_AUTH_URL: ${{ secrets.SF_AUTH_URL }}
            SFC_ORG: ${{ vars.SFC_ORG }} 
       run:  sf org login sfdx-url --alias ${SFC_ORG} --sfdx-url-file -f ${GITHUB_WORKSPACE}/URL/authFile.json
-
+    - name: List org
+      run:    sf org list
     - name: runScript
       env: 
         SF_SCRIPT: ${{ inputs.runScript }}
