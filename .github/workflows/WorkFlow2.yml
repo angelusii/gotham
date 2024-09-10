@@ -15,7 +15,7 @@ on:
         options:
         - PROD
         - INT
-        - DEV
+        - Develop
         
       runScript:
        type: string
