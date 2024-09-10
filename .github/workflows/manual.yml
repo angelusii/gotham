@@ -39,4 +39,14 @@ jobs:
            SFC_ORG: ${{ vars.SFC_ORG }}
         
       run: echo "Hello ${{ inputs.Environment }} and ${{ vars.KATANA_DEV }} nebo URL ${{ secrets.SF_AUTH_URL }}"
-       #    sf org login --alias ${SFC_ORG} sfdx-url-stdin -${SFC_AUTH_URL}
+          sf org login --alias ${SFC_ORG} sfdx-url-stdin -${SF_AUTH_URL}
+    - name: runScript
+      env: 
+        SF_SCRIPT: ${inputs.Script}
+      run: 
+        echo "{$SF_SCRIPT}
+        sf apex run --file ~/{$SF_SCRIPT}
+        
+      
+    
+    
