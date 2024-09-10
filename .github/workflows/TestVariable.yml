@@ -48,7 +48,7 @@ jobs:
       run:    sf org list
     - name: runScript
       env: 
-        SF_SCRIPT: ${{ inputs.runScript }}
+        SF_SCRIPT: ${{ inputs.ScriptName }}
         SFC_ORG: ${{ vars.SFC_ORG }} 
       run: 
         sf apex run --target-org ${SFC_ORG} --file ${GITHUB_WORKSPACE}/scripts/${SF_SCRIPT}
