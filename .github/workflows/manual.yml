@@ -35,8 +35,8 @@ jobs:
     # Runs a single command using the runners shell
     - name: Authorize org
       env:
-           SFC_AUTH_URL: ${{ vars.SFC_AUTHORIZE_URL }}
+           SF_AUTH_URL: ${{ secret.SF_AUTH_URL }}
            SFC_ORG: ${{ vars.SFC_ORG }}
         
-      run: echo "Hello ${{ inputs.Environment }} and ${{ vars.KATANA_DEV }} nebo ${{ vars.varan }}"
-           sf org login --alias ${SFC_ORG} sfdx-url-stdin -${SFC_AUTH_URL}
+      run: echo "Hello ${{ inputs.Environment }} and ${{ vars.KATANA_DEV }} nebo URL ${{ secret.SF_AUTH_URL }}"
+       #    sf org login --alias ${SFC_ORG} sfdx-url-stdin -${SFC_AUTH_URL}
