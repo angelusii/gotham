@@ -50,7 +50,7 @@ jobs:
         SF_SCRIPT: ${{ inputs.runScript }}
         SFC_ORG: ${{ vars.SFC_ORG }} 
       run: 
-        sf apex run -o Trailblazer -file ${GITHUB_WORKSPACE}/scripts/deleteAcc.apex
+        sf apex run -o ${SFC_ORG} -file ${GITHUB_WORKSPACE}/scripts/deleteAcc.apex
         
         
       
