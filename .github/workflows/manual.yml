@@ -40,7 +40,7 @@ jobs:
       env:
            SF_AUTH_URL: ${{ secrets.SF_AUTH_URL }}
            SFC_ORG: ${{ vars.SFC_ORG }} 
-      run:  sf org login sfdx-url --alias ${SFC_ORG} --sfdx-url-file < ${{ github.workspace }}/Test/test
+      run:  sf org login sfdx-url --alias ${SFC_ORG} --sfdx-url-file < ${{ GITHUB_WORKSPACE }}/Test/test
       
     - name: List orgs        
       run: sfdx force:org:list --all
