@@ -10,13 +10,13 @@ on:
     inputs:
       Environment:
         type: choice
-        description: Environment
+        description: Environment where to run
         required: true
         options:
         - PROD
         - INT
         - DEV
-      runScript:
+      ScriptName:
        type: string
        description: Script name
        required: true
@@ -41,9 +41,9 @@ jobs:
     # Runs a single command using the runners shell
     - name: Authorize org
       env:
-           SF_AUTH_URL: ${{ secrets.SF_AUTH_URL }}
+           SF_AUTH_FILE: ${{ secrets.SF_AUTH_URL }}
            SFC_ORG: ${{ vars.SFC_ORG }} 
-      run:  sf org login sfdx-url --sfdx-url-file ${GITHUB_WORKSPACE}/URL/authFile.json --alias Trailblazer
+      run:  sf org login sfdx-url --sfdx-url-file ${GITHUB_WORKSPACE}${SF_AUTH_FILE} --alias ${SFC_ORG}
     - name: List org
       run:    sf org list
     - name: runScript
@@ -51,7 +51,7 @@ jobs:
         SF_SCRIPT: ${{ inputs.runScript }}
         SFC_ORG: ${{ vars.SFC_ORG }} 
       run: 
-        sf apex run --target-org Trailblazer --file ${GITHUB_WORKSPACE}/scripts/deleteAcc.apex
+        sf apex run --target-org ${SFC_ORG} --file ${GITHUB_WORKSPACE}/scripts/${SF_SCRIPT}
         
         
       
