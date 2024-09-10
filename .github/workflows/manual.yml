@@ -48,7 +48,7 @@ jobs:
         SF_SCRIPT: ${{ inputs.runScript }}
       run: 
         echo "script {$SF_SCRIPT}"
-        sf apex run --file ~/{$SF_SCRIPT}
+        sf apex run --file $SF_SCRIPT
         
       
     
