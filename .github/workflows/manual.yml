@@ -44,7 +44,7 @@ jobs:
       env: 
         SF_SCRIPT: ${inputs.Script}
       run: 
-        echo "{$SF_SCRIPT}
+        echo "script {$SF_SCRIPT}"
         sf apex run --file ~/{$SF_SCRIPT}
         
       
