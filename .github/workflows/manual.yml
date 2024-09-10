@@ -47,7 +47,8 @@ jobs:
       env: 
         SF_SCRIPT: ${{ inputs.runScript }}
       run: 
-        sf apex run --file $SF_SCRIPT
+        sf apex run --target-${SFC_ORG} --file $SF_SCRIPT
+        
         
       
     
