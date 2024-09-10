@@ -42,13 +42,15 @@ jobs:
            SFC_ORG: ${{ vars.SFC_ORG }}
         
       run: sf org login --alias ${SFC_ORG} sfdx-url-stdin -${SF_AUTH_URL}
-           sfdx force:org:list --all
+
+    - name: List orgs        
+      run: sfdx force:org:list --all
 
     - name: runScript
       env: 
         SF_SCRIPT: ${{ inputs.runScript }}
       run: 
-        sf apex run --target-org ${SFC_ORG} --file $SF_SCRIPT
+        sf apex run --target-org ${SFC_ORG} --file force-app/main/default/classes/accountCreator.cls
         
         
       
