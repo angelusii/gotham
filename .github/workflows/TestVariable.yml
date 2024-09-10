@@ -8,9 +8,9 @@ on:
   workflow_dispatch:
     # Inputs the workflow accepts.
     inputs:
-      Environment:
+      Org:
         type: choice
-        description: Environment where to run
+        description: Org where to run
         required: true
         options:
         - PROD
@@ -22,15 +22,16 @@ on:
        required: true
 
 
-# A workflow run is made up of one or more jobs that can run sequentially or in parallel
 jobs:
-  # This workflow contains a single job called "greet"
   RunSalesforceScripts:
-    # The type of runner that the job will run on
     runs-on: ubuntu-latest #změnit na csas-linux
-    environment: Develop
+    environment:
+     name: ${{inputs.Org}}
+    env:
+      SF_AUTH_FILE: ${{ secrets.SF_AUTH_FILE }}
+      SFC_ORG: ${{ inputs.Org }} 
+      SFC_SCRIPT: ${{ inputs.ScriptName }}
 
-    # Steps represent a sequence of tasks that will be executed as part of the job
     steps:
     - name: Salesforce SFDX CLI Action
       uses: sfdx-actions/setup-sfdx@v1
@@ -38,18 +39,13 @@ jobs:
     - name: Checkout repository
       uses: actions/checkout@v2
             
-    # Runs a single command using the runners shell
     - name: Authorize org
-      env:
-           SF_AUTH_FILE: ${{ secrets.SF_AUTH_URL }}
-           SFC_ORG: ${{ vars.SFC_ORG }} 
       run:  sf org login sfdx-url --sfdx-url-file ${GITHUB_WORKSPACE}${SF_AUTH_FILE} --alias ${SFC_ORG}
+      
     - name: List org
       run:    sf org list
+      
     - name: runScript
-      env: 
-        SF_SCRIPT: ${{ inputs.ScriptName }}
-        SFC_ORG: ${{ vars.SFC_ORG }} 
       run: 
         sf apex run --target-org ${SFC_ORG} --file ${GITHUB_WORKSPACE}/scripts/${SF_SCRIPT}
         
