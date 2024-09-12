@@ -1,0 +1,55 @@
+# This is a basic workflow that is manually triggered
+
+name: Run Script on Org
+
+# Controls when the action will run. Workflow runs when manually triggered using the UI
+# or API.
+on:
+  workflow_dispatch:
+    # Inputs the workflow accepts.
+    inputs:
+      Org:
+        type: choice
+        description: Org where to run
+        required: true
+        options:
+        - PROD
+        - INT
+        - DEV
+      ScriptName:
+       type: string
+       description: Script name
+       required: true
+
+
+jobs:
+  RunSalesforceScripts:
+    runs-on: ubuntu-latest #změnit na csas-linux
+    environment:
+     name: ${{inputs.Org}}
+    env:
+      SF_AUTH_FILE: ${{ secrets.SF_AUTH_FILE }}
+      SFC_ORG: ${{ inputs.Org }} 
+      SFC_SCRIPT: ${{ inputs.ScriptName }}
+
+    steps:
+    - name: Salesforce SFDX CLI Action
+      uses: sfdx-actions/setup-sfdx@v1
+
+    - name: Checkout repository
+      uses: actions/checkout@v2
+            
+    - name: Authorize org
+      run:  sf org login sfdx-url --sfdx-url-file ${GITHUB_WORKSPACE}${SF_AUTH_FILE} --alias ${SFC_ORG}
+      
+    - name: List org
+      run:    sf org list
+      
+    - name: runScript
+      run: 
+        sf apex run --target-org ${SFC_ORG} --file ${GITHUB_WORKSPACE}/scripts/${SF_SCRIPT}
+        
+        
+      
+    
+    
