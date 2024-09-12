@@ -13,7 +13,6 @@ on:
         description: Org where to run
         required: true
         options:
-        - PROD
         - INT
         - DEV
       ScriptName:
@@ -25,19 +24,28 @@ on:
 jobs:
   RunSalesforceScripts:
     runs-on: ubuntu-latest #změnit na csas-linux
-    environment:
-     name: ${{inputs.Org}}
     env:
-      SF_AUTH_FILE: ${{ secrets.SF_AUTH_FILE }}
-      SFC_ORG: ${{ inputs.Org }} 
-      SFC_SCRIPT: ${{ inputs.ScriptName }}
+      SF_AUTH_FILE: ${{ secrets.SF_AUTH_FILE }}  
+      SFC_ORG: ${{ inputs.Org }} # Environment from input manual selection
+      SFC_SCRIPT: ${{ inputs.ScriptName }} # String containing name of the script 
 
     steps:
-    - name: Salesforce SFDX CLI Action
+    - name: Salesforce SFDX CLI Action   # Install sfdx as prerequsity to run sfdx commands
       uses: sfdx-actions/setup-sfdx@v1
 
-    - name: Checkout repository
+    - name: Checkout repository   # loading folders and files in repo 
       uses: actions/checkout@v2
+      
+    - name: Set environment
+      id: set-secrets-file
+      run: |
+        if [ "${SFC_ORG}" == "PROD" ]; then
+          echo "SF_AUTH_FILE=$FILE_PROD" >> $GITHUB_ENV
+        elif [ "${SFC_ORG}" == "$FILE_INT" ]; then
+          echo "SF_AUTH_FILE=PROD2" >> $GITHUB_ENV
+        elif [ "${SFC_ORG}" == "DEV" ]; then
+          echo "SF_AUTH_FILE=$FILE_DEV" >> $GITHUB_ENV
+        fi
             
     - name: Authorize org
       run:  sf org login sfdx-url --sfdx-url-file ${GITHUB_WORKSPACE}${SF_AUTH_FILE} --alias ${SFC_ORG}
