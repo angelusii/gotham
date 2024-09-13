@@ -47,7 +47,7 @@ jobs:
            SF_DISABLE_TELEMETRY: true
            SFDX_AUTH_URL: ${{ secrets.SF_AUTH_URL }}
            TARGET_ORG: ${{ vars.SFC_ORG }} 
-      run:  sf org login sfdx-url --sfdx-url-stdin <<<"${SFDX_AUTH_URL}" 
+      run:  sf org login sfdx-url --sfdx-url-stdin ${SFDX_AUTH_URL} 
             #sf org login sfdx-url --alias Trailblazer --sfdx-url-stdin <<<"${SFDX_AUTH_URL}" 
             #sf org login sfdx-url --sfdx-url-file ${GITHUB_WORKSPACE}/URL/authFile.json --alias Trailblazer
       
