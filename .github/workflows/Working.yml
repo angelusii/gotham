@@ -46,10 +46,6 @@ jobs:
  #     uses: actions/checkout@v2
     - name: install deploy
       run: npm i -g @salesforce/cli
-      
-    - name: Disable telemetry
-      run: sf config set disable-telemetry=true --global
-
             
     # Runs a single command using the runners shell
     - name: Authorize org
