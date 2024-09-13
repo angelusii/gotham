@@ -45,7 +45,7 @@ jobs:
  #   - name: Checkout repository
  #     uses: actions/checkout@v2
     - name: install deploy
-      run: npm i -g @salesforce/cli @flxbl-io/sfp
+      run: npm i -g @salesforce/cli
       
     - name: Disable telemetry
       run: sf config set disable-telemetry=true --global
