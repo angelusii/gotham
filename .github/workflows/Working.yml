@@ -42,6 +42,9 @@ jobs:
 
     - name: Disable telemetry
       run: sf config set disable-telemetry=true --global
+
+    - name: install deploy
+      run: npm i -g @salesforce/cli @flxbl-io/sfp
             
     # Runs a single command using the runners shell
     - name: Authorize org
