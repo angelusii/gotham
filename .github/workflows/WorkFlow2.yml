@@ -1,0 +1,33 @@
+# This is a basic workflow that is manually triggered
+
+name: Echo Variables
+
+on:
+  workflow_dispatch:
+    inputs:
+      Org:
+        type: choice
+        description: Environment where to run the script
+        required: true
+        options:
+          - PROD
+          - PRS
+          - INT
+          - DEV
+      ScriptName:
+        type: string
+        description: Script name
+        required: true
+
+jobs:
+  RunSalesforceScripts:
+    runs-on: ubuntu-latest
+    environment: ${{ github.event.inputs.Org == 'PROD' && 'Master' || github.event.inputs.Org == 'DEV' && 'Develop' || 'default-environment' }}
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+
+      - name: Run Script
+        run: |
+          echo "Running script in environment ${{ github.event.inputs.Org }} and name ${{ github.ref_name }} and name ${{ job.environment.name }} "
+          # Add your script execution commands here

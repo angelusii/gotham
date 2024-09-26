@@ -1,0 +1,63 @@
+# This is a basic workflow that is manually triggered
+
+name: Run Script on Org
+
+# Controls when the action will run. Workflow runs when manually triggered using the UI
+# or API.
+on:
+  workflow_dispatch:
+    # Inputs the workflow accepts.
+    inputs:
+      Org:
+        type: choice
+        description: Org where to run
+        required: true
+        options:
+        - INT
+        - DEV
+      ScriptName:
+       type: string
+       description: Script name
+       required: true
+
+
+jobs:
+  RunSalesforceScripts:
+    runs-on: ubuntu-latest #změnit na csas-linux
+    env:
+      SF_AUTH_FILE: ${{ secrets.SF_AUTH_FILE }}  
+      SFC_ORG: ${{ inputs.Org }} # Environment from input manual selection
+      SFC_SCRIPT: ${{ inputs.ScriptName }} # String containing name of the script 
+
+    steps:
+    - name: Salesforce SFDX CLI Action   # Install sfdx as prerequsity to run sfdx commands
+      uses: sfdx-actions/setup-sfdx@v1
+
+    - name: Checkout repository   # loading folders and files in repo 
+      uses: actions/checkout@v2
+      
+    - name: Set environment
+      id: set-secrets-file
+      run: |
+        if [ "${SFC_ORG}" == "DEV" ]; then
+          echo "SF_AUTH_FILE=${{ secret.AUTH_FILE_DEV}}" >> $GITHUB_ENV
+        elif [ "${SFC_ORG}" == "INT" ]; then
+          echo "SF_AUTH_FILE=${{ secret.AUTH_FILE_INT}}" >> $GITHUB_ENV
+        else
+          echo "SF_AUTH_FILE is empty"
+        fi
+            
+    - name: Authorize org  # authorize to Salesforce
+      run:  sf org login sfdx-url --sfdx-url-file ${GITHUB_WORKSPACE}${env.SF_AUTH_FILE} --alias ${SFC_ORG}
+      
+    - name: List org # check if the authorized org is succesfull
+      run:    sf org list
+      
+    - name: runScript 
+      run: 
+        sf apex run --target-org ${SFC_ORG} --file ${GITHUB_WORKSPACE}/scripts/${SF_SCRIPT}
+        
+        
+      
+    
+    
