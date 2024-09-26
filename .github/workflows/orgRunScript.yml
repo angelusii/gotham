@@ -35,6 +35,11 @@ jobs:
     steps:
     - name: Salesforce SFDX CLI Action   # Install sfdx as prerequsity to run sfdx commands
       uses: sfdx-actions/setup-sfdx@v1
+     
+    - name: Setup node
+      uses: actions/setup-node@v4
+      with:
+        registry-url: "https://npm.pkg.github.com"
 
     - name: Install tools
       run: npm i -g @salesforce/cli
