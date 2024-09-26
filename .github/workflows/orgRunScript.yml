@@ -52,7 +52,7 @@ jobs:
       uses: actions/checkout@v2
             
     - name: Authorize org 
-      run: sf org login sfdx-url --sfdx-url-stdin <<< "${{ secrets.SFDX_AUTH_URL }}" --alias ${SFC_ORG}
+      run: sf org login sfdx-url --alias ${SFC_ORG} --sfdx-url-stdin <<< "${{ secrets.SFDX_AUTH_URL }}" 
       
     - name: List org # check if the authorized org is succesfull
       run:    sf org list
