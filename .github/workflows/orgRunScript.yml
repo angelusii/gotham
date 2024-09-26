@@ -59,7 +59,7 @@ jobs:
       
     - name: runScript 
       run: 
-        sf apex run --target-org ${SFC_ORG} --file ${GITHUB_WORKSPACE}/scripts/${SF_SCRIPT}
+        sf apex run --target-org ${SFC_ORG} --file ${GITHUB_WORKSPACE}/scripts/${SFC_SCRIPT}
         
         
       
