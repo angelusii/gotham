@@ -39,7 +39,7 @@ jobs:
       env:
            SF_AUTH_URL: ${{ secrets.SF_AUTH_URL }}
            SFC_ORG: ${{ vars.SFC_ORG }} 
-      run: echo "SFC_ORG = ${SFC_ORG} and ScriptName = ${{inputs.runScript}} and Environment: ${{ job.environment.name }}"
+      run: echo "SFC_ORG = ${SFC_ORG} and ScriptName = ${{inputs.runScript}} and Environment= ${{ job.environment.name}}
   
         
         
