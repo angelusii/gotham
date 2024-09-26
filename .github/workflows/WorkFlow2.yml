@@ -29,5 +29,5 @@ jobs:
 
       - name: Run Script
         run: |
-          echo "Running script in environment: ${{ github.event.inputs.Org }} and name: ${{ github.ref_name }} and name: ${{ job.environment.name }}
+          echo "Running script in environment ${{ github.event.inputs.Org }} and name ${{ github.ref_name }} and name ${{ job.environment.name }} "
           # Add your script execution commands here
