@@ -34,7 +34,7 @@ jobs:
 
     steps:
     - name: Show actual branch
-      run:  echo "Actual environment =  ${{ github.ref_name }} "
+      run:  echo "Actual environment =  ${{ github.ref_name }}  Env Var=  ${{ var.TEST_VARIABLE }} " 
    
         
         
