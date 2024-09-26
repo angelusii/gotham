@@ -62,12 +62,11 @@ jobs:
       with:
         ref: master
         path: master_branch
+    - name: Access ManualSteps folder
+      run: |
+        cp -r master_branch/scripts ./ManualSteps
       
     - name: runScript 
       run: 
         sf apex run --target-org ${SFC_ORG} --file ${GITHUB_WORKSPACE}/scripts/${SFC_SCRIPT}
         
-        
-      
-    
-    
