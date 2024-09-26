@@ -22,12 +22,12 @@ on:
 jobs:
   RunSalesforceScripts:
     runs-on: ubuntu-latest
-    environment: ${{ github.event.inputs.Org == 'PROD' && 'env\prod' || github.event.inputs.Org == 'DEV' && 'env\dev' || 'default-environment' }}
+    environment: ${{ github.event.inputs.Org == 'PROD' && 'Master' || github.event.inputs.Org == 'DEV' && 'Develop' || 'default-environment' }}
     steps:
       - name: Checkout code
         uses: actions/checkout@v2
 
       - name: Run Script
         run: |
-          echo "Running script in environment: ${{ github.event.inputs.Org }}"
+          echo "Running script in environment: ${{ github.event.inputs.Org }} and name: ${{ github.ref_name }} and name: ${{ job.environment.name }}
           # Add your script execution commands here
