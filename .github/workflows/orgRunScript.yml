@@ -33,8 +33,8 @@ jobs:
       name: ${{ github.ref_name }}
 
     steps:
-    - name: Salesforce SFDX CLI Action   # Install sfdx as prerequsity to run sfdx commands
-      uses: sfdx-actions/setup-sfdx@v1
+ #   name: Salesforce SFDX CLI Action Install sfdx as prerequsity to run sfdx commands
+  #    uses: sfdx-actions/setup-sfdx@v1
      
     - name: Setup node
       uses: actions/setup-node@v4
