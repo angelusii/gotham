@@ -29,7 +29,7 @@ jobs:
 
     steps:
     - name: Show actual branch
-      run:  echo "Actual environment =  ${{ github.ref_name }}  Env Var=  ${{ vars.TEST_VARIABLE }}  envRef= $REF_NAME " 
+      run:  echo "Actual environment =  ${{ github.ref_name }}  Env Var=  ${{ vars.TEST_VARIABLE }}  envRef= $REF_NAME  GithubWorkspace=${GITHUB_WORKSPACE} " 
    
         
         
