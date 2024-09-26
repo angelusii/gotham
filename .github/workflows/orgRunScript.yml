@@ -64,7 +64,7 @@ jobs:
         path: master_branch
     - name: Access ManualSteps folder
       run: |
-        cp -r master_branch/scripts ./ManualSteps
+        cp -r master_branch/scripts ./scripts
       
     - name: runScript 
       run: 
