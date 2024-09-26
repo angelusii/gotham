@@ -28,9 +28,9 @@ jobs:
   # This workflow contains a single job called "greet"
   EchoVariables:
     # The type of runner that the job will run on
-    runs-on: ubuntu-latest #změnit na csas-linux
+    runs-on: ubuntu-latest
     environment:
-      name: ${{ inputs.Org == 'PROD' && 'env/prod' || inputs.Org == 'PRS' && 'env/prs' || inputs.Org == 'INT' && 'env/int' || inputs.Org == 'DEV' && 'env/dev' }}
+      name: ${{ inputs.Org == "PROD" && "env/prod"}}
 
     # Steps represent a sequence of tasks that will be executed as part of the job
     steps:          
