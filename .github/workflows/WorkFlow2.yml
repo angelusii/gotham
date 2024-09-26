@@ -2,31 +2,32 @@
 
 name: Echo Variables
 
-# Controls when the action will run. Workflow runs when manually triggered using the UI
-# or API.
 on:
   workflow_dispatch:
     inputs:
-      branch:
+      Org:
+        type: choice
+        description: Environment where to run the script
+        required: true
+        options:
+          - PROD
+          - PRS
+          - INT
+          - DEV
+      ScriptName:
         type: string
-        description: 'Branch to run the workflow on'
+        description: Script name
         required: true
 
-        
-      runScript:
-       type: string
-       description: scriptName
-       required: true
-
-
-# A workflow run is made up of one or more jobs that can run sequentially or in parallel
 jobs:
-  run-on-branch:
+  RunSalesforceScripts:
     runs-on: ubuntu-latest
+    environment: ${{ github.event.inputs.Org == 'PROD' && 'env\prod' || github.event.inputs.Org == 'DEV' && 'env\dev' || 'default-environment' }}
     steps:
       - name: Checkout code
         uses: actions/checkout@v2
-        with:
-          ref: ${{ github.event.inputs.branch }}
-      - name: Run a script
-        run: echo "Running on branch ${{ github.event.inputs.branch }}"
+
+      - name: Run Script
+        run: |
+          echo "Running script in environment: ${{ github.event.inputs.Org }}"
+          # Add your script execution commands here
