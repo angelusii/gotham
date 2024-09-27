@@ -12,13 +12,6 @@ on:
   workflow_dispatch:
     # Inputs the workflow accepts.
     inputs:
-      Org:
-        type: choice
-        description: Org where to run
-        required: true
-        options:
-        - INT
-        - DEV
       ScriptName:
        type: string
        description: Script name
@@ -30,21 +23,14 @@ jobs:
     runs-on: ubuntu-latest
     env:
       SF_AUTH_FILE: ${{ secrets.SF_AUTH_FILE }}  
-      SFC_ORG: ${{ inputs.Org }} # Environment from input manual selection
+      SFC_ORG: ${{ github.ref_name }} # Environment from input manual selection
       SFC_SCRIPT: ${{ inputs.ScriptName }} # String containing name of the script 
     
     environment:
       name: ${{ github.ref_name }}
 
     steps:
- #   name: Salesforce SFDX CLI Action Install sfdx as prerequsity to run sfdx commands
-  #    uses: sfdx-actions/setup-sfdx@v1
-     
-    - name: Setup node
-      uses: actions/setup-node@v4
-      with:
-        registry-url: "https://npm.pkg.github.com"
-
+  
     - name: Install tools
       run: npm i -g @salesforce/cli
 
