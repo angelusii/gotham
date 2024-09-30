@@ -61,7 +61,8 @@ jobs:
         cp -r master_branch/scripts ./ManualSteps
       
     - name: runScript 
-    
+      env:
+        TARGET_ORG: ${{ env.TARGET_ORG }}
       run: 
         sf apex run --target-org ${SFC_ORG} --file ${GITHUB_WORKSPACE}/scripts/${SFC_SCRIPT}
       
