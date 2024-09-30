@@ -25,12 +25,14 @@ jobs:
       SF_AUTH_FILE: ${{ secrets.SF_AUTH_FILE }}  
       SFC_ORG: ${{ github.ref_name }} # Environment from input manual selection
       SFC_SCRIPT: ${{ inputs.ScriptName }} # String containing name of the script 
+      TARGET_ORG: ${SFC_ORG#env/}
     
     environment:
       name: ${{ github.ref_name }}
 
     steps:
-  
+    - name: echo variables
+      run: echo " Target org =  $TARGET_ORG"
     - name: Install tools
       run: npm i -g @salesforce/cli
 
