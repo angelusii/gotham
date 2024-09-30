@@ -42,8 +42,11 @@ jobs:
     - name: Checkout repository   # loading folders and files in repo 
       uses: actions/checkout@v2
             
-    - name: Authorize org 
-      run: sf org login sfdx-url --alias ${SFC_ORG} --sfdx-url-stdin <<< "${{ secrets.SFDX_AUTH_URL }}" 
+    - name: Authorize org ${{ env.TARGET_ORG }}
+      env: 
+        SFDX_AUTOMATION_AUTH_URL: ${{ secrets.SFDX_AUTOMATION_AUTH_URL }}
+        TARGET_ORG: ${{ env.TARGET_ORG }}
+      run: sf org login sfdx-url --alias ${TARGET_ORG} --sfdx-url-stdin <<< "${{ secrets.SFDX_AUTH_URL }}" 
       
     - name: List org # check if the authorized org is succesfull
       run:    sf org list
@@ -58,6 +61,7 @@ jobs:
         cp -r master_branch/scripts ./ManualSteps
       
     - name: runScript 
+    
       run: 
         sf apex run --target-org ${SFC_ORG} --file ${GITHUB_WORKSPACE}/scripts/${SFC_SCRIPT}
       
