@@ -1,16 +1,10 @@
-# This is a basic workflow that is manually triggered
-
-name: Run Script on Org
+name: Run Manual Apex
 
 env:
   SF_DISABLE_DNS_CHECK: true
   SF_DISABLE_TELEMETRY: true
-
-# Controls when the action will run. Workflow runs when manually triggered using the UI
-# or API.
 on:
   workflow_dispatch:
-    # Inputs the workflow accepts.
     inputs:
       ScriptName:
        type: string
@@ -23,8 +17,8 @@ jobs:
     runs-on: ubuntu-latest
     env:
       SF_AUTH_FILE: ${{ secrets.SF_AUTH_FILE }}  
-      REF_NAME: ${{ github.ref_name }} # Environment from input manual selection
-      SFC_SCRIPT: ${{ inputs.ScriptName }} # String containing name of the script 
+      REF_NAME: ${{ github.ref_name }} 
+      SFC_SCRIPT: ${{ inputs.ScriptName }} 
     
     environment:
       name: ${{ github.ref_name }}
@@ -39,7 +33,7 @@ jobs:
     - name: Install tools
       run: npm i -g @salesforce/cli
 
-    - name: Checkout repository   # loading folders and files in repo 
+    - name: Checkout repository   
       uses: actions/checkout@v2
             
     - name: Authorize org ${{ env.TARGET_ORG }}
@@ -48,27 +42,11 @@ jobs:
         TARGET_ORG: ${{ env.TARGET_ORG }}
       run: sf org login sfdx-url --alias ${TARGET_ORG} --sfdx-url-stdin <<< "${{ secrets.SFDX_AUTH_URL }}" 
       
-    - name: List org # check if the authorized org is succesfull
+    - name: List org 
       run:    sf org list
-
-    - name: Checkout master branch
-      uses: actions/checkout@v3
-      with:
-        ref: master
-        path: master_branch
-    - name: Access ManualSteps folder
-      run: |
-        cp -r master_branch/scripts ./ManualSteps
       
     - name: runScript 
       env:
         TARGET_ORG: ${{ env.TARGET_ORG }}
       run: 
-        sf apex run --target-org ${SFC_ORG} --file ${GITHUB_WORKSPACE}/scripts/${SFC_SCRIPT}
-      
- 
-        
-        
-      
-    
-    
+        sf apex run --target-org ${TARGET_ORG} --file ${GITHUB_WORKSPACE}/scripts/${SFC_SCRIPT}
