@@ -6,9 +6,9 @@ env:
 on:
   workflow_dispatch:
     inputs:
-      Script Path:
+      ScriptPath:
        type: string
-       description: Script name
+       description: Path to the script starting from folder scripts/apex/...
        required: true
 
 
