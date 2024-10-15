@@ -43,7 +43,7 @@ jobs:
     - name: Checkout repository   
       uses: actions/checkout@v2
             
-    - name: Authorize org ${{ TARGET_ORG }}
+    - name: Authorize org ${TARGET_ORG}
       env: 
         SFDX_AUTOMATION_AUTH_URL: ${{ secrets.SFDX_AUTOMATION_AUTH_URL }}
       run: sf org login sfdx-url --alias ${TARGET_ORG} --sfdx-url-stdin <<< "${{ secrets.SFDX_AUTH_URL }}" 
