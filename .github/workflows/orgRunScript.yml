@@ -56,4 +56,4 @@ jobs:
       
     - name: runScript 
       run: 
-        bash ${GITHUB_WORKSPACE}/scripts/${SFC_SCRIPT}
+        bash ${GITHUB_WORKSPACE}/scripts/${TARGET_ORG}/${SFC_SCRIPT}
