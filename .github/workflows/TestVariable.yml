@@ -46,7 +46,7 @@ jobs:
       uses: actions/checkout@v2
       
     - name: echo
-      run: echo ${{ env.TARGET_ORG }}
+      run: echo ${{ env.TARGET_ORG }} "and" ${TARGET_ORG}
       
     - name: Authorize org ${{ env.TARGET_ORG }}
       env: 
