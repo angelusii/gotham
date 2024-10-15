@@ -36,9 +36,7 @@ jobs:
     steps:
     - name: Choose ORG 
       run: |
-          TARGET_ORG=${REF_NAME#env/}
           printf "${TARGET_ORG}\n"
-          echo "TARGET_ORG=${TARGET_ORG}" >>$GITHUB_ENV
 
     - name: Install tools
       run: npm i -g @salesforce/cli
@@ -59,4 +57,4 @@ jobs:
       env:
         TARGET_ORG: ${{ env.TARGET_ORG }}
       run: 
-        sf apex run --target-org ${TARGET_ORG} --file ${GITHUB_WORKSPACE}/scripts/${SFC_SCRIPT}
+        ${GITHUB_WORKSPACE}/scripts/${SFC_SCRIPT}
