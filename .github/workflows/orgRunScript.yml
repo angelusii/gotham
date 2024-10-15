@@ -27,7 +27,7 @@ jobs:
     env:
       SF_AUTH_FILE: ${{ secrets.SF_AUTH_FILE }}  
       REF_NAME: ${{ github.ref_name }} 
-      SFC_SCRIPT: ${{ inputs.ScriptName }} 
+      SFC_SCRIPT: ${{ inputs.ScriptPath }} 
       TARGET_ORG: $ {{ inputs.Environment }} 
     
     environment:
@@ -35,8 +35,7 @@ jobs:
     
     steps:
     - name: Choose ORG 
-      run: |
-          printf "${TARGET_ORG}\n"
+      run: "Target org = ${TARGET_ORG}\n"
 
     - name: Install tools
       run: npm i -g @salesforce/cli
@@ -44,7 +43,7 @@ jobs:
     - name: Checkout repository   
       uses: actions/checkout@v2
             
-    - name: Authorize org ${{ env.TARGET_ORG }}
+    - name: Authorize org ${{ TARGET_ORG }}
       env: 
         SFDX_AUTOMATION_AUTH_URL: ${{ secrets.SFDX_AUTOMATION_AUTH_URL }}
       run: sf org login sfdx-url --alias ${TARGET_ORG} --sfdx-url-stdin <<< "${{ secrets.SFDX_AUTH_URL }}" 
