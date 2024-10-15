@@ -25,7 +25,6 @@ jobs:
   RunSalesforceScripts:
     runs-on: ubuntu-latest
     env:
-      SF_AUTH_FILE: ${{ secrets.SF_AUTH_FILE }}  
       REF_NAME: ${{ github.ref_name }} 
       SFC_SCRIPT: ${{ inputs.ScriptPath }} 
       TARGET_ORG: ${{ inputs.Environment }}
@@ -45,6 +44,7 @@ jobs:
             
     - name: Authorize org ${{ env.TARGET_ORG }}
       env: 
+        TARGET_ORG: ${{ env.TARGET_ORG }}
         SFDX_AUTOMATION_AUTH_URL: ${{ secrets.SFDX_AUTOMATION_AUTH_URL }}
       run: sf org login sfdx-url --alias ${TARGET_ORG} --sfdx-url-stdin <<< "${{ secrets.SFDX_AUTH_URL }}" 
       
