@@ -30,7 +30,7 @@ jobs:
       TARGET_ORG: ${{ inputs.Environment }}
     
     environment:
-      name: ${TARGET_ORG}
+      name: ${{ inputs.Environment }}
     
     steps:
     - name: Choose ORG 
