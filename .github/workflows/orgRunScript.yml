@@ -31,7 +31,7 @@ jobs:
       TARGET_ORG: $ {{ inputs.Environment }} 
     
     environment:
-      name: 
+      name: $TARGET_ORG
     
     steps:
     - name: Choose ORG 
@@ -47,14 +47,11 @@ jobs:
     - name: Authorize org ${{ env.TARGET_ORG }}
       env: 
         SFDX_AUTOMATION_AUTH_URL: ${{ secrets.SFDX_AUTOMATION_AUTH_URL }}
-        TARGET_ORG: ${{ env.TARGET_ORG }}
       run: sf org login sfdx-url --alias ${TARGET_ORG} --sfdx-url-stdin <<< "${{ secrets.SFDX_AUTH_URL }}" 
       
     - name: List org 
       run:    sf org list
       
     - name: runScript 
-      env:
-        TARGET_ORG: ${{ env.TARGET_ORG }}
       run: 
         ${GITHUB_WORKSPACE}/scripts/${SFC_SCRIPT}
