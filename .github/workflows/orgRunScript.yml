@@ -50,7 +50,7 @@ jobs:
         TARGET_ORG: ${{ env.TARGET_ORG }}
         SFDX_AUTOMATION_AUTH_URL: ${{ secrets.SFDX_AUTH_URL }}
         VAR_TARGET_ORG_ECHO: ${{ vars.VAR_TARGET_ORG }} 
-      run: sf org login sfdx-url --alias ${TARGET_ORG} --sfdx-url-stdin <<< "${SFDX_AUTOMATION_AUTH_URL}" 
+      run: sf org login sfdx-url --alias ${TARGET_ORG} --sfdx-url-stdin <<< ${SFDX_AUTOMATION_AUTH_URL}
       
     - name: List org 
       run:    sf org list
