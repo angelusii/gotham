@@ -10,6 +10,15 @@ on:
        type: string
        description: Path to the script - e.g dev/scheduleJob.apex
        required: true
+      Environment:
+        type: choice
+        description: Environment to run the script in
+        required: true
+        options:
+          - master
+          - env/prs
+          - env/int
+          - env/dev
 
 
 jobs:
@@ -19,9 +28,10 @@ jobs:
       SF_AUTH_FILE: ${{ secrets.SF_AUTH_FILE }}  
       REF_NAME: ${{ github.ref_name }} 
       SFC_SCRIPT: ${{ inputs.ScriptName }} 
+      TARGET_ORG: $ {{ inputs.Environment }} 
     
     environment:
-      name: ${{ github.ref_name }}
+      name: 
     
     steps:
     - name: Choose ORG 
