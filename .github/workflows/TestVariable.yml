@@ -37,7 +37,6 @@ jobs:
     - name: Choose target ORG
       run: | 
           TARGET_ORG=${INPUT_ENVIRONMENT#env/}
-          printf "${TARGET_ORG}\n"
           echo "TARGET_ORG=${TARGET_ORG}" >>$GITHUB_ENV
 
     - name: Install tools
