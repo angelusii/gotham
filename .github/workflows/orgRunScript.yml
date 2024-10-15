@@ -10,7 +10,7 @@ on:
        type: string
        description: Path to the script - e.g dev/scheduleJob.apex
        required: true
-      Environment:
+      environment:
         type: choice
         description: Environment to run the script in
         required: true
@@ -28,14 +28,14 @@ jobs:
       SF_AUTH_FILE: ${{ secrets.SF_AUTH_FILE }}  
       REF_NAME: ${{ github.ref_name }} 
       SFC_SCRIPT: ${{ inputs.ScriptPath }} 
-      TARGET_ORG: $ {{ inputs.Environment }} 
+      TARGET_ORG: $ {{ inputs.Environment }}
     
     environment:
-      name: $ {{ inputs.Environment }} 
+      name: ${TARGET_ORG}
     
     steps:
     - name: Choose ORG 
-      run: echo "Target org = ${TARGET_ORG}"
+      run: echo "Target org =" ${TARGET_ORG}
 
     - name: Install tools
       run: npm i -g @salesforce/cli
