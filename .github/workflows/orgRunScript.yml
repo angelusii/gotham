@@ -41,7 +41,10 @@ jobs:
 
     - name: Checkout repository   
       uses: actions/checkout@v2
-            
+      
+    - name: echo
+      run: echo ${{ env.TARGET_ORG }}
+      
     - name: Authorize org ${{ env.TARGET_ORG }}
       env: 
         TARGET_ORG: ${{ env.TARGET_ORG }}
